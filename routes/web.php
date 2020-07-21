@@ -26,3 +26,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/booking', 'BookingController@index')->name('booking');
 
+Route::get('/booking/tambah', 'BookingController@tambah');
+
+Route::post('/booking/store', 'BookingController@store');
+
+Route::get('/booking/edit/{id}', 'BookingController@edit');
+
+Route::post('/booking/update/{id}', 'BookingController@update');
+
+Route::get('/booking/delete/{id}', 'BookingController@delete');

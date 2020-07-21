@@ -1,19 +1,24 @@
-<!doctype html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
-        <title>Booking Service</title>
-    </head>
-    <body>
+@extends('layouts.master')
+<title>Booking Service</title>
+
+@section('content')
         <div class="container">
             <div class="card mt-5">
+                @if(session('success'))
+                    <div class="alert alert-success" role="alert">
+                    {{session('success')}}
+                    </div>
+                @endif
+                @if(session('error'))
+                    <div class="alert alert-danger" role="alert">
+                    {{session('error')}}
+                    </div>
+                @endif
                 <div class="card-header text-center">
-                    Booking Service
+                    <strong> DATA SERVICE </strong>
                 </div>
                 <div class="card-body">
-                    <a href="/booking/create" class="btn btn-primary">Input Booking Baru</a>
+                    <a href="/booking/tambah" class="btn btn-primary">Input Booking Baru</a>
                     <br/>
                     <br/>
                     <table class="table table-bordered table-hover table-striped">
@@ -29,6 +34,7 @@
                                 <th>No Hp</th>
                                 <th>Email</th>
                                 <th>Alamat</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,7 +52,7 @@
                                 <td>{{ $bkg->alamat }}</td>
                                 <td>
                                     <a href="/booking/edit/{{ $bkg->id }}" class="btn btn-warning">Edit</a>
-                                    <a href="/booking/hapus/{{ $bkg->id }}" class="btn btn-danger">Hapus</a>
+                                    <a href="/booking/delete/{{ $bkg->id }}" class="btn btn-danger">Hapus</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -55,5 +61,3 @@
                 </div>
             </div>
         </div>
-    </body>
-</html>

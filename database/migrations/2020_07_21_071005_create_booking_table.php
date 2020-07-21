@@ -23,9 +23,9 @@ class CreateBookingTable extends Migration
             $table->string('no_hp');
             $table->string('email')->unique();
             $table->string('alamat');
-            $table->date('tanggal_booking');
+            $table->string('tanggal_booking');
             $table->string('jam_booking');
-            
+            $table->timestamps();
         });
     }
 
