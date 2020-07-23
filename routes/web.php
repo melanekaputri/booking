@@ -30,8 +30,8 @@ Route::get('/booking/tambah', 'BookingController@tambah');
 
 Route::post('/booking/store', 'BookingController@store');
 
-Route::get('/booking/edit/{id}', 'BookingController@edit');
+Route::get('/booking/{id}/edit', 'BookingController@edit');
 
-Route::post('/booking/update/{id}', 'BookingController@update');
+Route::post('/booking/{id}/update', 'BookingController@update');
 
-Route::get('/booking/delete/{id}', 'BookingController@delete');
+Route::get('/booking/{id}/delete', 'BookingController@delete');

@@ -1,24 +1,7 @@
-<!doctype html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
-
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>  
-        
-        
-    </head>
-    <body>
-    <div class="container">
-            <div class="card mt-5">
+@extends('layouts.master')
+<title>EDIT DATA BOOKING</title>
+@section('content')
+<div class="card shadow m-4">
                 @if(session('success'))
                     <div class="alert alert-success" role="alert">
                     {{session('success')}}
@@ -30,11 +13,10 @@
                     </div>
                 @endif
                 <div class="card-header text-center">
-                    <strong>Edit Data Booking</strong>
+                    <strong> TAMBAH DATA BOOKING </strong>
                 </div>
-                <div class="card-body">
-                    
-                    <form method="POST" action="/booking/update/{{$booking ->id}}">
+        <div class="card-body">
+                <form method="POST" action="/booking/{{$booking ->id}}/update">
                         {{ csrf_field() }}
                         
                         <div class="row">
@@ -80,15 +62,10 @@
                                         <label>Tanggal Booking</label>
                                         <div class='input-group' id='tanggal_booking'>
                                             <input class="tanggal_booking form-control" type="text" name="tanggal_booking" value="{{$booking->tanggal_booking}}">
-                                        </div>            
-                                       
+                                        </div>     
+                                      
                                     </div>
-                                    <script type="text/javascript">
-                                        $('.tanggal_booking').datepicker({  
-                                        format: 'dd-mm-yyyy',
-                                        autoclose:true
-                                        });  
-                                    </script>
+                                    
 
                                     <div class="form-group">
                                         <label>Jam Booking</label>
@@ -97,11 +74,7 @@
                                         </div>
                                       
                                     </div>
-                                    <script type="text/javascript">
-                                        $('.jam_booking').datetimepicker({
-                                            format: 'HH:mm:ss'
-                                        }); 
-                                    </script>
+                                    
                                     <div class="form-group">
                                         <label>Nama Motor</label>
                                         <input type="text" name="nama_motor" class="form-control" placeholder="Nama Motor" value="{{$booking->nama_motor}}">  
@@ -128,10 +101,22 @@
                             <a href="/booking" class="btn btn-primary">Kembali</a>
                         </div>
 
-                    </form>
+            </form>
+    </div>
+</div>  
+@stop
 
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+@section('footer')
+<script type="text/javascript">
+    $('.tanggal_booking').datepicker({  
+    format: 'dd-mm-yyyy',
+    autoclose:true
+    });  
+</script>
+
+<script type="text/javascript">
+    $('.jam_booking').datetimepicker({
+    format: 'HH:mm:ss'
+    }); 
+</script>
+@stop

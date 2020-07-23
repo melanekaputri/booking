@@ -2,8 +2,7 @@
 <title>Booking Service</title>
 
 @section('content')
-        <div class="container">
-            <div class="card mt-5">
+    <div class="card shadow m-4">
                 @if(session('success'))
                     <div class="alert alert-success" role="alert">
                     {{session('success')}}
@@ -17,12 +16,12 @@
                 <div class="card-header text-center">
                     <strong> DATA SERVICE </strong>
                 </div>
-                <div class="card-body">
-                    <a href="/booking/tambah" class="btn btn-primary">Input Booking Baru</a>
-                    <br/>
-                    <br/>
-                    <table class="table table-bordered table-hover table-striped">
-                        <thead>
+        <div class="card-body">           
+            <div class="table-responsive ml-5">
+                <a href="/home" class="btn btn-primary">Kembali</a>
+                <a href="/booking/tambah" class="btn btn-primary">Input Booking Baru</a><br/><br/>
+                <table class="table table-hover table-paginate" width="100%" cellspacing="0">
+                    <thead>
                             <tr>
                                 <th>Nama Konsumen</th>
                                 <th>Jenis Kelamin</th>
@@ -36,8 +35,8 @@
                                 <th>Alamat</th>
                                 <th>Aksi</th>
                             </tr>
-                        </thead>
-                        <tbody>
+                    </thead>
+                    <tbody>
                             @foreach($booking as $bkg)
                             <tr>
                                 <td>{{ $bkg->nama_konsumen }}</td>
@@ -51,13 +50,41 @@
                                 <td>{{ $bkg->email }}</td>
                                 <td>{{ $bkg->alamat }}</td>
                                 <td>
-                                    <a href="/booking/edit/{{ $bkg->id }}" class="btn btn-warning">Edit</a>
-                                    <a href="/booking/delete/{{ $bkg->id }}" class="btn btn-danger">Hapus</a>
+                                    <a href="/booking/{{ $bkg->id }}/edit" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="#" booking-id="{{$bkg->id}}" class="btn btn-danger delete btn-sm">Hapus</a>                                    
                                 </td>
                             </tr>
                             @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                    </tbody>
+                </table>
             </div>
-        </div>
+        </div>    
+    </div>
+@stop
+
+@section('footer')
+    <script>
+        $('.delete').click(function(){
+            var booking_id = $(this).attr('booking-id');
+            swal({
+                title: "Yakin Ingin Menghapus Data Ini?",
+                text: "Data Booking dengan ID "+ booking_id +" akan dihapus!!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                    window.location = "/booking/"+booking_id+"/delete";
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+        $('.table-paginate').dataTable();
+    } );
+    </script>
+   
+@stop

@@ -10,7 +10,7 @@ class BookingController extends Controller
 {
     public function index() {
 
-        $booking = Booking::all();
+        $booking = Booking::all()->sortBy('tanggal_booking');
         return view('booking.index', ['booking'=>$booking]);
     }
 
